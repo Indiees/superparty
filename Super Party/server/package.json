@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "DEBUG=* node index.js",
     "dev": "DEBUG=* nodemon index.js"
   },
   "keywords": [],

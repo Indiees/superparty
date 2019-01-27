@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Room{
 
-    string user;
-    string roomId;
+    public Player player;
+    public string roomId;
 
-    public Room(string user, string roomId) {
+    public Room(Player player, string roomId) {
         this.roomId = roomId;
-        this.user = user;
+        this.player = player;
     }
 }

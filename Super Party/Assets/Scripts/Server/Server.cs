@@ -3,6 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
 
 public class Server : MonoBehaviour {
 
@@ -11,9 +14,19 @@ public class Server : MonoBehaviour {
     public GameObject playerPrefab;
     public Dictionary<string, GameObject> players = new Dictionary<string, GameObject>();
 
+    [Header("UI Room")]
+    public InputField inputCreateRoomName;
+    public InputField inputJoinRoomName;
+
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else 
+            Destroy(gameObject);
         socket = GetComponent<SocketIOComponent>();
     }
 
@@ -25,18 +38,36 @@ public class Server : MonoBehaviour {
         socket.On("move", OnMove);
     }
 
-    private void CreateRoom(SocketIOEvent e)
+    public void CreateRoomMenu()
     {
-        print("Room Id: " + e.data);
-        Room room = new Room(e.data["user"].ToString(), e.data["roomId"].ToString());
+        Player player = new Player("123");
+        Room room = new Room(player, inputCreateRoomName.text);
         JSONObject roomToJson = new JSONObject(JsonUtility.ToJson(room));
-        socket.Emit("create room", roomToJson); 
+        Debug.Log(roomToJson.ToString());
+        socket.Emit("create room", roomToJson);
     }
+
+    public void JoinRoomMenu()
+    {
+        Player player = new Player("678");
+        Room room = new Room(player, inputJoinRoomName.text);
+        JSONObject roomToJson = new JSONObject(JsonUtility.ToJson(room));
+        Debug.Log(roomToJson.ToString());
+        socket.Emit("join room", roomToJson);
+    }
+
+    //private void CreateRoom(SocketIOEvent e)
+    //{
+    //    print("Room Id: " + e.data);
+    //    Room room = new Room(e.data["user"].ToString(), e.data["roomId"].ToString());
+    //    JSONObject roomToJson = new JSONObject(JsonUtility.ToJson(room));
+    //    socket.Emit("create room", roomToJson); 
+    //}
 
     private void OnConnected(SocketIOEvent e)
     {
         print("Connected");        
-        socket.On("create room", CreateRoom);
+        //socket.On("create room", CreateRoom);
     }
 
     private void OnSpawned(SocketIOEvent e)

@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class MainMenuScript : MonoBehaviour {
+
+    [SerializeField] Button Play;
+    [SerializeField] Button Option;
+    [SerializeField] Button Exit;
 
     public void PlayButtonPressed()
     {

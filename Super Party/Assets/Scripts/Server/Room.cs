@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : MonoBehaviour {
+public class Room{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    string user;
+    string roomId;
+
+    public Room(string user, string roomId) {
+        this.roomId = roomId;
+        this.user = user;
+    }
 }

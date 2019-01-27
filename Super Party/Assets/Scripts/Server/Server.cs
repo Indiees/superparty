@@ -28,14 +28,14 @@ public class Server : MonoBehaviour {
     private void CreateRoom(SocketIOEvent e)
     {
         print("Room Id: " + e.data);
+        Room room = new Room(e.data["user"].ToString(), e.data["roomId"].ToString());
+        JSONObject roomToJson = new JSONObject(JsonUtility.ToJson(room));
+        socket.Emit("create room", roomToJson); 
     }
 
     private void OnConnected(SocketIOEvent e)
     {
-        print("Connected");
-        Room room = new Room("12345", "2468");
-        JSONObject roomToJson = new JSONObject(JsonUtility.ToJson(room));
-        socket.Emit("create room", roomToJson);
+        print("Connected");        
         socket.On("create room", CreateRoom);
     }
 

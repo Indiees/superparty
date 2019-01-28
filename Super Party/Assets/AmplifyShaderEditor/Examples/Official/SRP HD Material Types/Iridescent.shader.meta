@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: c4884a1528238df49aaedde1c28e6b8e
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _IridescentMask: {fileID: 2800000, guid: dfad33b30cf293f409e6d753d6a07e2a, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

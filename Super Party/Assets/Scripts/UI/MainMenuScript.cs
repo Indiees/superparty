@@ -10,6 +10,11 @@ public class MainMenuScript : MonoBehaviour {
     [SerializeField] Button Option;
     [SerializeField] Button Exit;
 
+    private void Start()
+    {
+        StartCoroutine(DISCOMODEENGAGED());
+    }
+
     public void PlayButtonPressed()
     {
         SceneManager.LoadScene("Lobby");
@@ -24,6 +29,22 @@ public class MainMenuScript : MonoBehaviour {
     {
         Application.Quit();
         Debug.Log("Exit requested");
+    }
+
+    IEnumerator DISCOMODEENGAGED()
+    {
+        while (3 > 2)
+        {
+            yield return new WaitForSeconds(1);
+            SendColorChange();
+        }
+    }
+
+    public void SendColorChange()
+    {
+        GameObject[] DiscoPads = GameObject.FindGameObjectsWithTag("Furniture");
+        foreach (GameObject DiscoPad in DiscoPads)
+            DiscoPad.GetComponent<DiscoFloorScript>().ColorChange();
     }
 
 }

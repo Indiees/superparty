@@ -6,13 +6,15 @@ public class DiscoFloorScript : MonoBehaviour {
 
     Renderer rend;
     Color RandoColo;
+    Light Emit;
 
 	void Start ()
     {
         RandoColo = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         rend = GetComponent<Renderer>();
         rend.material.SetColor("_Color", RandoColo);
-        rend.material.SetColor("_EmissionColor", RandoColo);
+        Emit = GetComponent<Light>();
+        Emit.color = RandoColo;
 	}
 
     public void ColorChange()
@@ -20,7 +22,8 @@ public class DiscoFloorScript : MonoBehaviour {
         RandoColo = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         rend = GetComponent<Renderer>();
         rend.material.SetColor("_Color", RandoColo);
-        rend.material.SetColor("_EmissionColor", RandoColo);
+        Emit.color = RandoColo;
+        Debug.Log("Color Changed");
     }
 	
 }
